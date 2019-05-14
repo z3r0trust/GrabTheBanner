@@ -7,4 +7,4 @@ usually this text includes signatures of applications that issue the message. so
 there are so many techniques and tools that grabs the banner.
 but there are such scenarios, we are unable to use these tools, so we have to build anon programs that solves our problems.
 
-also, if you are curious what is behind the scene, you can code your own program.
+also, if you are curious like me and you want to know what is behind the scene, you can code your own program.
