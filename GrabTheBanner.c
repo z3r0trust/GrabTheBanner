@@ -8,11 +8,9 @@
 #include <netdb.h>
 #include <errno.h>
 
-
 void scanplease(int port, char host[]);
  
 int main(int argc, char **argv) {
- 
  char hostname[100];
  char *p;
  int ports[5];
@@ -24,7 +22,6 @@ int main(int argc, char **argv) {
        fprintf(stderr,"[+]usage: %s <hostname> <port,port,port...>\n", argv[0]);
        exit(0);
     }
-     
     p = strtok(argv[2], token);
     strcpy(hostname, argv[1]);
     
@@ -40,24 +37,20 @@ int main(int argc, char **argv) {
  }
  return 0;
 }
- 
 void scanplease(int port, char host[]) {
- 
     int sock, n;
     struct hostent *server;
     struct sockaddr_in serv_addr;
      
     char buffer[4096];
-  
     server = gethostbyname(host);
      
  sock = socket(AF_INET, SOCK_STREAM, 0);
-
+ 
  if(sock < 0) {
   fprintf(stderr, "[-]error creating socket");
   return;
  }
-  
  bzero((char *) &serv_addr, sizeof(serv_addr));
  serv_addr.sin_family = AF_INET;
  // AF_UNIX for Unix style socket
@@ -71,8 +64,7 @@ void scanplease(int port, char host[]) {
   fprintf(stderr, "[-]error connecting to port\n");
   return;
  }
-  
- memset(buffer, 0, sizeof(buffer));
+  memset(buffer, 0, sizeof(buffer));
  strcpy(buffer, "cöp\r\n");
   
  n = write(sock, buffer, strlen(buffer));
@@ -80,14 +72,12 @@ void scanplease(int port, char host[]) {
   fprintf(stderr, "[-]error writing (port closed maybe?!)\n");
   return;
  }
-  
  bzero(buffer, 4096);
  n = read(sock, buffer, 4096);
  if(n < 0) {
   fprintf(stderr, "[-]error reading (port closed maybe?!)\n");
   return;
  }
-  
  fprintf(stdout,"[*]%s\n", buffer);
  close(sock);
      
